@@ -27,7 +27,7 @@ void setup() {
   Serial.begin(9600); 
   SPI.begin();       // Init SPI bus
   mfrc522.PCD_Init(); // Init MFRC522 
-  lcd.init(); // Print a message to the LCD.
+  lcd.init(); // Print a message to the LCD
   lcd.backlight();
   lcd.setCursor(0,0);
   lcd.print("Show your SID");
@@ -78,7 +78,7 @@ if ( mfrc522.PICC_IsNewCardPresent())
 
 
 
-            delay(3000);
+          delay(3000);
 
            lcd.clear();
 
@@ -115,7 +115,6 @@ if ( mfrc522.PICC_IsNewCardPresent())
   
              }
            }else{
-              Serial.println();
               lcd.clear();
               lcd.setCursor(0,0);
               lcd.print("Unknow SID Card");
