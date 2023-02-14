@@ -21,7 +21,7 @@ MFRC522 mfrc522(SS_PIN, RST_PIN); // Instance of the class
 
 
 
-int SID[2][4] = {{214, 248, 28, 240}, {37, 223, 35, 0}}; //To stored UID (Cards have access), a 2D matrix, (card 3[test tag]: 34, 228, 143, 30): didn’t add in code
+int SID[2][4] = {{214, 248, 28, 240}, {37, 223, 35, 0}}; //This is the stored UID (Unlock Card) (card 3: 34, 228, 143, 30): didnt add in code
 
 int codeRead = 0;
 
@@ -36,7 +36,7 @@ void setup() {
 
    mfrc522.PCD_Init(); // Init MFRC522 
 
-   Serial.println("Arduino RFID reading UID");
+   //Serial.println("Arduino RFID reading UID");
 
 
 
@@ -55,7 +55,7 @@ void setup() {
 
 }
 
-void loop() { // a loop to read the card
+void loop() {
 
   
 
@@ -69,7 +69,7 @@ if ( mfrc522.PICC_IsNewCardPresent())
 
            lcd.clear();
 
-           Serial.print("Tag UID:");    // Print a message to the LCD
+           //Serial.print("Tag UID:");
 
            lcd.setCursor(0,0);
 
@@ -77,11 +77,11 @@ if ( mfrc522.PICC_IsNewCardPresent())
 
            lcd.setCursor(0,1);
 
-           for (byte i = 0; i < mfrc522.uid.size; i++) {    // a for loop to read UID
+           for (byte i = 0; i < mfrc522.uid.size; i++) {  
 
-                  Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "); 
+                  //Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "); 
 
-                  Serial.print(mfrc522.uid.uidByte[i], HEX);
+                  //Serial.print(mfrc522.uid.uidByte[i], HEX);
 
                   
 
@@ -95,7 +95,7 @@ if ( mfrc522.PICC_IsNewCardPresent())
 
             
 
-            Serial.println();
+            //Serial.println();
 
 
 
@@ -104,7 +104,7 @@ if ( mfrc522.PICC_IsNewCardPresent())
             
             boolean match = true;
             int tmp;
-            for (int j = 0; j<2; j++)  // to read the 2D matrix of the stored UID
+            for (int j = 0; j<2; j++) 
 
             {
               match = true;
@@ -144,16 +144,16 @@ if ( mfrc522.PICC_IsNewCardPresent())
 
            
   
-           if(match)  // if the UID is match with the card id which stored in SID 
+           if(match)
 
            {
              lcd.print("valid SID card");
              switch (tmp)
 
              {
-              case 0:   //if read the card of James’s one, print his name, student ID in the serial monitor. Show his name and welcome on LCD
+              case 0:
               {
-                Serial.println("\nStudent: Ng Tsz Chiu \nSID: 20178374");
+                Serial.println("20178374"); //\nStudent: Ng Tsz Chiu \nSID: 
                 delay(3000);
                 lcd.clear();
                 lcd.setCursor(0,0);
@@ -162,9 +162,9 @@ if ( mfrc522.PICC_IsNewCardPresent())
                 lcd.print("Ng Tsz Chiu");
                 break;
               }
-              case 1:   //if read the UID of the test card, assume it is Chim ID card, print his name, student ID in the serial monitor. Show his name and welcome on LCD
+              case 1:
               {
-                Serial.println("\nStudent: Chim \nSID: 00000000");
+                Serial.println("12345678"); //\nStudent: Chim \nSID: 
                 delay(3000);
                 lcd.clear();
                 lcd.setCursor(0,0);
@@ -182,19 +182,19 @@ if ( mfrc522.PICC_IsNewCardPresent())
 
     
 
-           }else{ //if the UID read from the nfc reader in not stored in SID, print the following messages
+           }else{
 
      
 
               lcd.print("invalid SID card"); 
 
-             Serial.println("\nUnknown SID Card");
+             //Serial.println("\nUnknown SID Card");
 
            }
 
              
 
-             Serial.println("============================");
+             //Serial.println("============================");
 
             
 
@@ -212,7 +212,7 @@ if ( mfrc522.PICC_IsNewCardPresent())
 
 }
 
-void reset_state() //reset every things after read a card
+void reset_state()
 
 {
 
